@@ -1,0 +1,4 @@
+pipecat-ai[silero,openai,deepgram,cartesia,websocket]
+redis
+twilio
+httpx

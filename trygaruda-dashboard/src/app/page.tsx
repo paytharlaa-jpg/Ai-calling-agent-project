@@ -80,6 +80,26 @@ export default function Dashboard() {
   return (
     <>
       <header className="header">
+        <h1>Overview</h1>
+      </header>
+
+      {/* SaaS Overview Metrics Row */}
+      <div className="grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", marginBottom: "32px" }}>
+        <div className="agent-card glass" style={{ padding: "20px" }}>
+          <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.9rem" }}>Account Balance</p>
+          <h2 style={{ margin: "8px 0 0 0", fontSize: "2rem", color: "var(--accent)" }}>$45.00</h2>
+        </div>
+        <div className="agent-card glass" style={{ padding: "20px" }}>
+          <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.9rem" }}>Voice Minutes Left</p>
+          <h2 style={{ margin: "8px 0 0 0", fontSize: "2rem", color: "var(--accent)" }}>450</h2>
+        </div>
+        <div className="agent-card glass" style={{ padding: "20px" }}>
+          <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.9rem" }}>Total Calls Made</p>
+          <h2 style={{ margin: "8px 0 0 0", fontSize: "2rem", color: "var(--accent)" }}>124</h2>
+        </div>
+      </div>
+
+      <header className="header" style={{ marginTop: "48px" }}>
         <h1>Your Agents</h1>
         <button className="btn-primary" onClick={() => setIsCreateModalOpen(true)}>+ Create Agent</button>
       </header>

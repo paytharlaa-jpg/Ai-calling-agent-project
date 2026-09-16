@@ -7,7 +7,18 @@ from database import engine, get_db
 # Create tables
 models.Base.metadata.create_all(bind=engine)
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="TryGaruda Voice AI Platform API")
+
+# Configure CORS so the Next.js frontend can communicate with the API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In production, restrict this to your Vercel URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- USER ENDPOINTS ---
 
@@ -23,6 +34,11 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return db_user
 
 # --- AGENT ENDPOINTS ---
+
+@app.get("/users/{user_id}/agents/", response_model=list[schemas.Agent])
+def get_agents_for_user(user_id: int, db: Session = Depends(get_db)):
+    agents = db.query(models.Agent).filter(models.Agent.owner_id == user_id).all()
+    return agents
 
 @app.post("/users/{user_id}/agents/", response_model=schemas.Agent)
 def create_agent_for_user(
